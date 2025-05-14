@@ -1,0 +1,256 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 265 89% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 265 89% 95%;
+    --secondary-foreground: 265 89% 40%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 265 89% 95%;
+    --accent-foreground: 265 89% 40%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 265 89% 60%;
+    --radius: 0.5rem;
+
+    --sidebar-background: 265 89% 60%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 0 0% 100%;
+    --sidebar-primary-foreground: 265 89% 60%;
+    --sidebar-accent: 265 89% 70%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 265 89% 55%;
+    --sidebar-ring: 0 0% 100%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Page Transition Animations */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+/* Card hover effects */
+.card-hover-effect {
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card-hover-effect:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px -5px rgba(var(--primary), 0.1), 0 8px 10px -6px rgba(var(--primary), 0.1);
+}
+
+/* Sidebar animations */
+.sidebar-item {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.sidebar-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background-color: hsl(var(--sidebar-accent));
+  border-radius: 0 var(--radius) var(--radius) 0;
+  transition: width 0.3s ease;
+  z-index: -1;
+}
+
+.sidebar-item:hover::before {
+  width: 100%;
+}
+
+.sidebar-item[data-active="true"]::before {
+  width: 100%;
+  background-color: hsl(var(--sidebar-accent));
+}
+
+/* Pulse animation for notifications */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.pulse-animation {
+  animation: pulse 2s infinite;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--primary)) 0%,
+    hsl(var(--primary)) 70%,
+    hsl(var(--accent-foreground)) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Shimmer effect for loading states */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Button hover effects */
+.button-hover-slide {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.button-hover-slide::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  transition: height 0.3s ease;
+  z-index: -1;
+}
+
+.button-hover-slide:hover::after {
+  height: 100%;
+}
+
+/* Badge animations */
+.badge-pop {
+  transition: transform 0.2s ease;
+}
+
+.badge-pop:hover {
+  transform: scale(1.1);
+}
+
+/* Progress bar animation */
+.progress-bar-animate {
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar-animate::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: shimmer 2s infinite;
+}
+
+/* Floating animation */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Sidebar glow effect */
+.sidebar-glow {
+  box-shadow: 0 0 15px rgba(var(--primary), 0.3);
+  transition: box-shadow 0.3s ease;
+}
+
+.sidebar-glow:hover {
+  box-shadow: 0 0 25px rgba(var(--primary), 0.5);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
